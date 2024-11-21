@@ -4,4 +4,6 @@ Simple tool that converts GIFs to WebMs right in your browser - does not upload 
 
 GIFs are terrible for moving images and should die. Please use proper video formats - they are much better for the web.
 
+Try out the tool: https://batpad.github.io/gif-to-video/
+
 
