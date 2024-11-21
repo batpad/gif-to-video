@@ -2,6 +2,8 @@
 let ffmpeg = null;
 let selectedFile = null;
 let fetchFileGlobal = null;
+let convertedVideoBlob = null;
+
 // Initialize FFmpeg
 async function initFFmpeg() {
     try {
@@ -61,10 +63,8 @@ async function convertToVideo() {
 
         // Read the output file
         const data = await ffmpeg.FS('readFile', 'output.webm');
-        
-        // Create video URL and show preview
-        const videoBlob = new Blob([data.buffer], { type: 'video/webm' });
-        const videoUrl = URL.createObjectURL(videoBlob);
+        convertedVideoBlob = new Blob([data.buffer], { type: 'video/webm' });
+        const videoUrl = URL.createObjectURL(convertedVideoBlob);
         
         const videoPreview = document.getElementById('videoPreview');
         videoPreview.src = videoUrl;
@@ -80,6 +80,22 @@ async function convertToVideo() {
         convertBtn.textContent = 'Convert to Video';
         convertBtn.disabled = false;
     }
+}
+
+// Add the download handler function
+function handleDownload() {
+    if (!convertedVideoBlob) return;
+
+    const downloadLink = document.createElement('a');
+    downloadLink.href = URL.createObjectURL(convertedVideoBlob);
+    
+    // Get original filename and replace extension
+    const originalName = selectedFile.name.replace(/\.gif$/, '');
+    downloadLink.download = `${originalName}.webm`;
+    
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
 }
 
 // Initialize the application
@@ -117,6 +133,9 @@ async function init() {
 
     // Set up convert button handler
     document.getElementById('convertBtn').addEventListener('click', convertToVideo);
+
+    // Add download button handler
+    document.getElementById('downloadBtn').addEventListener('click', handleDownload);
 }
 
 // Start the application
