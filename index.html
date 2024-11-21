@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GIF to Video Converter</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .drop-zone {
+            border: 2px dashed #ccc;
+            border-radius: 4px;
+            padding: 20px;
+            text-align: center;
+            margin: 20px 0;
+            cursor: pointer;
+        }
+
+        .drop-zone.dragover {
+            border-color: #000;
+            background: #f0f0f0;
+        }
+
+        .preview-container {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .preview-container img,
+        .preview-container video {
+            max-width: 100%;
+            max-height: 400px;
+            margin: 10px 0;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .faq {
+            margin-top: 40px;
+        }
+
+        .faq h2 {
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>GIF to Video Converter</h1>
+    <p>Convert your GIF files to video format (WebM/MP4) right in your browser!</p>
+
+    <div class="drop-zone" id="dropZone">
+        <p>Drop your GIF here or</p>
+        <input type="file" id="fileInput" accept=".gif" class="hidden">
+        <button onclick="document.getElementById('fileInput').click()">Choose File</button>
+    </div>
+
+    <div class="preview-container">
+        <h3>Original GIF</h3>
+        <img id="gifPreview" class="hidden">
+        
+        <h3>Converted Video</h3>
+        <video id="videoPreview" controls class="hidden"></video>
+    </div>
+
+    <div class="controls">
+        <button id="convertBtn" disabled>Convert to Video</button>
+        <button id="downloadBtn" disabled>Download Video</button>
+    </div>
+
+    <section class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <h3>How does this work?</h3>
+        <p>This tool uses FFmpeg.wasm to convert GIF files to video format directly in your browser. No files are uploaded to any server - all processing happens locally on your device.</p>
+        
+        <h3>What video format will I get?</h3>
+        <p>The tool converts GIFs to WebM format, which provides excellent compression while maintaining quality. The video can be played in all modern browsers.</p>
+        
+        <h3>Is there a file size limit?</h3>
+        <p>Since all processing happens in your browser, the main limitation is your device's memory. We recommend keeping GIFs under 50MB for the best experience.</p>
+    </section>
+
+    <!-- FFmpeg.wasm -->
+    <script src="https://cdn.jsdelivr.net/npm/@ffmpeg/ffmpeg@0.11.6/dist/ffmpeg.min.js"></script>
+    
+    <!-- Main application code -->
+    <script type="module" src="main.js"></script>
+</body>
+</html> 
