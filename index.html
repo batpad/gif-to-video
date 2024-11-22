@@ -33,6 +33,10 @@
             text-align: center;
         }
 
+        .preview-container > div {
+            margin: 20px 0;
+        }
+
         .preview-container img,
         .preview-container video {
             max-width: 100%;
@@ -97,6 +101,18 @@
         h1 + p {
             margin-bottom: 5px;
         }
+
+        .step {
+            display: none;  /* Hide all steps by default */
+        }
+
+        .step.active {
+            display: block;  /* Show active steps */
+        }
+
+        .controls {
+            text-align: center;
+        }
     </style>
     <script src="coi-serviceworker.js"></script>
 </head>
@@ -107,23 +123,30 @@
         <p>This tool is dedicated to <a href="https://bsky.app/profile/vincentsarago.xyz" target="_blank">Vincent Sarago</a> 💙</p>
     </div>
 
-    <div class="drop-zone" id="dropZone">
-        <p>Drop your GIF here or</p>
-        <input type="file" id="fileInput" accept=".gif" class="hidden">
-        <button onclick="document.getElementById('fileInput').click()">Choose File</button>
+    <div class="step active" id="uploadStep">
+        <div class="drop-zone" id="dropZone">
+            <p>Drop your GIF here or</p>
+            <input type="file" id="fileInput" accept=".gif" class="hidden">
+            <button onclick="document.getElementById('fileInput').click()">Choose File</button>
+        </div>
     </div>
 
     <div class="preview-container">
-        <h3>Original GIF</h3>
-        <img id="gifPreview" class="hidden">
+        <div class="step" id="previewStep">
+            <h3>Original GIF</h3>
+            <img id="gifPreview">
+            <div class="controls">
+                <button id="convertBtn">Convert to Video</button>
+            </div>
+        </div>
         
-        <h3>Converted Video</h3>
-        <video id="videoPreview" controls class="hidden"></video>
-    </div>
-
-    <div class="controls">
-        <button id="convertBtn" disabled>Convert to Video</button>
-        <button id="downloadBtn" disabled>Download Video</button>
+        <div class="step" id="videoStep">
+            <h3>Converted Video</h3>
+            <video id="videoPreview" controls></video>
+            <div class="controls">
+                <button id="downloadBtn">Download Video</button>
+            </div>
+        </div>
     </div>
 
     <section class="faq">

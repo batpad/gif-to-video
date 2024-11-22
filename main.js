@@ -18,6 +18,16 @@ async function initFFmpeg() {
     }
 }
 
+// Add this helper function at the top
+function showStep(stepId) {
+    // Hide all steps
+    document.querySelectorAll('.step').forEach(step => {
+        step.classList.remove('active');
+    });
+    // Show the requested step
+    document.getElementById(stepId).classList.add('active');
+}
+
 // Handle file selection
 function handleFileSelect(file) {
     if (!file || !file.type.includes('gif')) {
@@ -30,10 +40,9 @@ function handleFileSelect(file) {
     // Show GIF preview
     const gifPreview = document.getElementById('gifPreview');
     gifPreview.src = URL.createObjectURL(file);
-    gifPreview.classList.remove('hidden');
-
-    // Enable convert button
-    document.getElementById('convertBtn').disabled = false;
+    
+    // Switch to preview step
+    showStep('previewStep');
 }
 
 // Handle file conversion
@@ -68,10 +77,9 @@ async function convertToVideo() {
         
         const videoPreview = document.getElementById('videoPreview');
         videoPreview.src = videoUrl;
-        videoPreview.classList.remove('hidden');
 
-        // Enable download button
-        document.getElementById('downloadBtn').disabled = false;
+        // Show video step
+        showStep('videoStep');
 
     } catch (error) {
         console.error('Conversion error:', error);
