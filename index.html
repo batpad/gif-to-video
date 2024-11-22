@@ -68,12 +68,44 @@
             border-bottom: 1px solid #eee;
             padding-bottom: 10px;
         }
+
+        .dedication {
+            font-style: italic;
+            font-size: 0.85em;
+            color: #666;
+            margin: 0 0 15px 0;
+            padding: 3px 8px;
+            border-left: 2px solid #007bff;
+            background-color: #f8f9fa;
+            display: inline-block;
+        }
+
+        .dedication p {
+            margin: 0;
+            line-height: 1.2;
+        }
+
+        .dedication a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .dedication a:hover {
+            text-decoration: underline;
+        }
+
+        h1 + p {
+            margin-bottom: 5px;
+        }
     </style>
     <script src="coi-serviceworker.js"></script>
 </head>
 <body>
     <h1>GIF to Video Converter</h1>
-    <p>Convert your GIFs to WebMs right in your browser! This tool is dedicated to <a href="https://bsky.app/profile/vincentsarago.xyz" target="_blank">Vincent Sarago.</a></p>
+    <p>Convert your GIFs to WebMs right in your browser!</p>
+    <div class="dedication">
+        <p>This tool is dedicated to <a href="https://bsky.app/profile/vincentsarago.xyz" target="_blank">Vincent Sarago</a> 💙</p>
+    </div>
 
     <div class="drop-zone" id="dropZone">
         <p>Drop your GIF here or</p>
